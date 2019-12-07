@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Absk chrome plugin",
+  "description": "Extension is intended to filter offers in autobazar.sk without non-reliable sources.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "resources/absk.png",
+    "default_popup": "default_popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://www.autobazar.sk/"
+  ],
+  "content_scripts": [{
+    "js": ["collect.js"],
+    "matches": ["https://*.autobazar.sk/*"]
+  }]
+
+}
