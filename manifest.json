@@ -13,12 +13,18 @@
     "storage"
   ],
   "background": {
-    "scripts": ["src/js/background.js"],
+    "page": "src/html/background.html",
     "persistent": false
   },
-  "content_scripts": [{
-    "js": ["src/js/collect.js"],
-    "matches": ["https://*.autobazar.sk/*"]
-  }]
-
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/filter.js",
+        "src/js/collector.js"
+      ],
+      "matches": [
+        "https://*.autobazar.sk/*"
+      ]
+    }
+  ]
 }
