@@ -5,14 +5,19 @@
   "version": "1.0",
   "browser_action": {
     "default_icon": "resources/absk.png",
-    "default_popup": "default_popup.html"
+    "default_popup": "src/default_popup.html"
   },
   "permissions": [
     "activeTab",
-    "https://www.autobazar.sk/"
+    "https://www.autobazar.sk/",
+    "storage"
   ],
+  "background": {
+    "scripts": ["src/js/background.js"],
+    "persistent": false
+  },
   "content_scripts": [{
-    "js": ["collect.js"],
+    "js": ["src/js/collect.js"],
     "matches": ["https://*.autobazar.sk/*"]
   }]
 
