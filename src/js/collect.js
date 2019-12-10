@@ -3,9 +3,9 @@ chrome.extension.sendMessage({title: 'get_data'},
         var htmlObject = document.createElement('div');
         htmlObject.innerHTML = response;
 
-        let items = htmlObject.getElementsByClassName('item  top  ');
-        chrome.storage.sync.get({"ids": []}, function (obj) {
+        let items = htmlObject.getElementsByClassName('item   ');
 
+        chrome.storage.sync.get({"ids": []}, function (obj) {
             console.log("Retrieved");
             let ids = obj.ids;
             for (let i = 0, l = items.length; i < l; i++) {
@@ -21,7 +21,7 @@ chrome.storage.sync.get({"ids": []}, function (obj) {
     new_items = [];
 
     let storage_value = obj.ids;
-    let items = document.getElementsByClassName('item  top  ');
+    let items = document.getElementsByClassName('item   ');
 
     if (storage_value) {
         for (var i = 0, f = 0, l = items.length; i < l; i++) {
@@ -31,7 +31,9 @@ chrome.storage.sync.get({"ids": []}, function (obj) {
                 }
             }
             if (f > 0) {
-                items[i].remove()
+                items[i].remove();
+                i--;
+                f = 0;
             }
         }
     }
