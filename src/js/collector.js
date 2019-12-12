@@ -1,7 +1,10 @@
-let page_count = 30; //todo move to background
+let it = 0;
 
-for (let it = 1; it < page_count; it++){
-
+setInterval(function () {
+    it++;
+    if (it === 100) {
+        it = 0;
+    }
     chrome.extension.sendMessage({title: 'get_data_' + it},
         function (response) {
             if (response !== "NO MORE") {
@@ -22,7 +25,5 @@ for (let it = 1; it < page_count; it++){
                 })
             }
         }
-    );
-
-}
-
+    )
+}, 1000);

@@ -11,7 +11,7 @@ chrome.storage.sync.get({"ids": []}, function (obj) {
             }
             if (f > 0) {
                 items[i].remove();
-                i--;
+                i--; l--;
                 f = 0;
             }
         }

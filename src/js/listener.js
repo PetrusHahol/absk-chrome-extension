@@ -22,4 +22,4 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
         };
     }
     return true;
-})
+});
