@@ -1,20 +1,13 @@
-chrome.storage.sync.get({"ids": []}, function (obj) {
-    let storage_values = obj.ids;
-    let items = document.getElementsByClassName('item   ');
+chrome.storage.local.get({ "ids": [] }, (obj) => {
+    const storage_values = new Set(obj.ids);
 
-    if (storage_values) {
-        for (var i = 0, f = 0, l = items.length; i < l; i++) {
-            for (var j = 0, st_l = storage_values.length; j < st_l; j++) {
-                if (storage_values[j] === items[i].dataset.id) {
-                    f += 1;
-                }
-            }
-            if (f > 0) {
-                items[i].remove();
-                i--; l--;
-                f = 0;
-            }
+    // convert HTMLCollection (which is weird) to normal array
+    const items = Array.from(document.getElementsByClassName('item   '));
+    items.forEach((item) => {
+        const item_id = item.dataset.id;
+        if (storage_values.has(item_id)) {
+            item.parentElement.removeChild(item);
         }
-    }
+    });
 });
 
