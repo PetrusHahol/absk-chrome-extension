@@ -1,10 +1,12 @@
 chrome.extension.onMessage.addListener(async (message, sender, sendResponse) => {
-    
     if (message.title.startsWith('get_data')) {
-        let page_number = 1;
 
         while (true) {
-            const res = await fetch(`https://autocentrum-aaa-auto-a-s.autobazar.sk/autocentrum-aaa-auto-a-s/?p[page]=${page_number++}`, {
+            // WA to make it work for MVP
+            let min = 1, max = 300;
+            let page_number = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            const res = await fetch(`https://autocentrum-aaa-auto-a-s.autobazar.sk/autocentrum-aaa-auto-a-s/?p[page]=${page_number}`, {
                 headers: {
                     "Access-Control-Allow-Headers": "document,text/html,json",
                     "Accept": "text/html,application/xhtml+xml,application/xml; q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
@@ -13,7 +15,7 @@ chrome.extension.onMessage.addListener(async (message, sender, sendResponse) => 
             });
             const response = await res.text();
             if (res.status < 200 || res.status >= 300) {
-                break;
+                console.log("Response has not received.")
             }
             const htmlObject = document.createElement('div');
             htmlObject.innerHTML = response;
