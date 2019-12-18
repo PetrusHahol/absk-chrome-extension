@@ -31,7 +31,7 @@ chrome.extension.onMessage.addListener(async (message, sender, sendResponse) => 
     if (message.title.startsWith('get_data')) {
 
         let { last_check } = await LocalStorage.get({ last_check: "1970-01-01T00:00:00Z" });
-        if (new Date() - new Date(last_check) <= 1000 * 60 * 60 * 24) {
+        if (new Date() - new Date(last_check) <= 1000 * 60 * 60 * 6) {
             return
         }
         await wait(Math.floor(Math.random() * 100));
